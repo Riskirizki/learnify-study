@@ -11,9 +11,9 @@ Learnify Study is a simple application that helps you organize your learning tas
 ## Project Structure
 
 - `components/`: Directory containing React components.
-  - `learnify.tsx`: Component to display the list of learning tasks.
+  - `learnify-study.tsx`: Component to display the list of learning tasks.
 - `data/`: Directory containing data used in the application.
-  - `learnify.ts`: File containing learning task data.
+  - `learnify-study.ts`: File containing learning task data.
 - `app.tsx`: Main application file that renders components.
 - `index.tsx`: Main entry file for the React application.
 - `index.css`: CSS file that styles layout and appearance using Tailwind CSS.
