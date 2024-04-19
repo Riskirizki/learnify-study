@@ -1,4 +1,4 @@
-import { learnify } from "../data/learnify";
+import { learnify } from "../data/learnify-study";
 
 export function Learnify() {
   return (

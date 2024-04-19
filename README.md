@@ -1,6 +1,6 @@
-# Learnify
+# Learnify Study
 
-Learnify is a simple application that helps you organize your learning tasks. With Learnify, you can create a list of tasks that need to be completed and track your progress in completing those tasks.
+Learnify Study is a simple application that helps you organize your learning tasks. With Learnify, you can create a list of tasks that need to be completed and track your progress in completing those tasks.
 
 ## Key Features
 

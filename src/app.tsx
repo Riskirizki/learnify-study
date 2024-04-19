@@ -1,9 +1,9 @@
-import { Learnify } from "./components/learnify";
+import { Learnify } from "./components/learnify-study";
 
 export function App() {
   return (
     <div>
-      <h1>Welcome to Learnify</h1>
+      <h1>Welcome to Learnify Study</h1>
       <Learnify />
     </div>
   );
