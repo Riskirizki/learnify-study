@@ -1,4 +1,4 @@
-export const learnify = [
+export const learningList = [
   {
     id: 1,
     title: "Learn React",
