@@ -8,17 +8,6 @@ Learnify Study is a simple application that helps you organize your learning tas
 - Each task has a title that can be displayed.
 - Each task can be marked as "done" or "not done".
 
-## Project Structure
-
-- `components/`: Directory containing React components.
-  - `learnify-study.tsx`: Component to display the list of learning tasks.
-- `data/`: Directory containing data used in the application.
-  - `learnify-study.ts`: File containing learning task data.
-- `app.tsx`: Main application file that renders components.
-- `index.tsx`: Main entry file for the React application.
-- `index.css`: CSS file that styles layout and appearance using Tailwind CSS.
-- `vite-env.d.ts`: File providing type references for Vite.
-
 ## Technologies Used
 
 - React
