@@ -1,4 +1,3 @@
-import React from "react";
 import { LearningList } from "./components/learning-list";
 
 export function App() {
