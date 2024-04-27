@@ -13,51 +13,54 @@ const Container = styled.div`
 const ContentWrapper = styled.div`
   width: 90%;
   max-width: 800px;
-  padding: 40px;
+  padding: 20px;
   background-color: #f5f5f5;
   border-radius: 12px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #333;
   text-align: center;
 `;
 
 const Form = styled.form`
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Label = styled.label`
-  display: block;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 12px;
+  padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const Button = styled.button`
-  padding: 12px 24px;
+  padding: 8px 16px;
+  width: 100px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
   }
 `;
 
@@ -72,11 +75,14 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   background-color: #fff;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 15px;
+  margin-bottom: 15px;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export function LearningList() {
@@ -107,6 +113,10 @@ export function LearningList() {
     setNewItemTitle(event.target.value);
   };
 
+  const removeLearningItemById = (idToRemove: number) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== idToRemove));
+  };
+
   const filteredItems = items.filter((learningItem) =>
     learningItem.title.toLowerCase().includes(keyword)
   );
@@ -126,7 +136,7 @@ export function LearningList() {
             onChange={handleInputChange}
             required
           />
-          <Button type="submit">Add Item</Button>
+          <Button type="submit">Add</Button>
         </Form>
         <Form>
           <Label htmlFor="keyword">Search</Label>
@@ -141,7 +151,12 @@ export function LearningList() {
         <hr />
         <List>
           {filteredItems.map((learningItem) => (
-            <ListItem key={learningItem.id}>{learningItem.title}</ListItem>
+            <ListItem key={learningItem.id}>
+              {learningItem.title}
+              <Button onClick={() => removeLearningItemById(learningItem.id)}>
+                Remove
+              </Button>
+            </ListItem>
           ))}
         </List>
       </ContentWrapper>
