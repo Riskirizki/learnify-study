@@ -14,7 +14,10 @@ export function LearningList() {
     event.preventDefault();
     if (!newLearningListTitle.trim()) return;
 
-    const nextId = Math.max(...learningListItems.map((item) => item.id), 0) + 1;
+    const nextId =
+      learningListItems.length > 0
+        ? Math.max(...learningListItems.map((item) => item.id)) + 1
+        : 1;
     const newLearningListItem = {
       id: nextId,
       title: newLearningListTitle.trim(),
