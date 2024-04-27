@@ -1,165 +1,108 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import { useState } from "react";
 import { learningList } from "../data/learning-list";
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ContentWrapper = styled.div`
-  width: 90%;
-  max-width: 800px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 12px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-`;
-
-const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
-`;
-
-const Form = styled.form`
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 15px;
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  width: 100px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-`;
-
-const SearchInput = styled(Input)`
-  margin-bottom: 0;
-`;
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const ListItem = styled.li`
-  background-color: #fff;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 export function LearningList() {
   const [keyword, setKeyword] = useState("");
-  const [items, setItems] = useState(learningList);
-  const [newItemTitle, setNewItemTitle] = useState("");
+  const [learningListItems, setLearningListItems] = useState(learningList);
+  const [newLearningListTitle, setNewLearningListTitle] = useState("");
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value.toLowerCase());
-  };
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setNewLearningListTitle(event.target.value);
+  }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!newItemTitle.trim()) return;
+    if (!newLearningListTitle.trim()) return;
 
-    const lastId = items.length > 0 ? items[items.length - 1].id : 0;
-    const newItem = {
-      id: lastId + 1,
-      title: newItemTitle.trim(),
+    const nextId = Math.max(...learningListItems.map((item) => item.id), 0) + 1;
+    const newLearningListItem = {
+      id: nextId,
+      title: newLearningListTitle.trim(),
       isDone: false,
     };
 
-    setItems((prevItems) => [...prevItems, newItem]);
-    setNewItemTitle("");
-  };
+    setLearningListItems((prevItems) => [...prevItems, newLearningListItem]);
+    setNewLearningListTitle("");
+  }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewItemTitle(event.target.value);
-  };
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setKeyword(event.target.value.toLowerCase());
+  }
 
-  const removeLearningItemById = (idToRemove: number) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== idToRemove));
-  };
+  function removeLearningListItemById(idToRemove: number) {
+    setLearningListItems((prevItems) =>
+      prevItems.filter((item) => item.id !== idToRemove)
+    );
+  }
 
-  const filteredItems = items.filter((learningItem) =>
-    learningItem.title.toLowerCase().includes(keyword)
+  const filteredLearningListItems = learningListItems.filter(
+    (learningListItem) => learningListItem.title.toLowerCase().includes(keyword)
   );
 
   return (
-    <Container>
-      <ContentWrapper>
-        <Title>Welcome to Learnify Study!</Title>
-        <Form onSubmit={handleSubmit}>
-          <Label htmlFor="newItem">Add New Item</Label>
-          <Input
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full max-w-3xl mx-auto p-6 bg-gray-700 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold text-white mb-6 text-center">
+          Welcome to Learnify Study!
+        </h1>
+        <form onSubmit={handleSubmit} className="mb-6">
+          <label
+            htmlFor="newItem"
+            className="block mb-2 text-lg font-medium text-white"
+          >
+            Add New Item
+          </label>
+          <input
             type="text"
             id="newItem"
             name="newItem"
             placeholder="Enter new item title"
-            value={newItemTitle}
+            value={newLearningListTitle}
             onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-md mb-4"
             required
           />
-          <Button type="submit">Add</Button>
-        </Form>
-        <Form>
-          <Label htmlFor="keyword">Search</Label>
-          <SearchInput
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out"
+          >
+            Add
+          </button>
+        </form>
+        <form className="mb-6">
+          <label
+            htmlFor="keyword"
+            className="block mb-2 text-lg font-medium text-white"
+          >
+            Search
+          </label>
+          <input
             type="text"
             id="keyword"
             name="q"
             placeholder="Search learning items..."
             onChange={handleSearchChange}
+            className="w-full px-4 py-2 border rounded-md mb-4"
           />
-        </Form>
-        <hr />
-        <List>
-          {filteredItems.map((learningItem) => (
-            <ListItem key={learningItem.id}>
-              {learningItem.title}
-              <Button onClick={() => removeLearningItemById(learningItem.id)}>
+        </form>
+        <hr className="mb-6" />
+        <ul className="list-none p-0">
+          {filteredLearningListItems.map((learningListItem) => (
+            <li
+              key={learningListItem.id}
+              className="bg-white p-4 mb-4 rounded-md shadow-md flex justify-between items-center"
+            >
+              <span className="text-lg">{learningListItem.title}</span>
+              <button
+                onClick={() => removeLearningListItemById(learningListItem.id)}
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300 ease-in-out"
+              >
                 Remove
-              </Button>
-            </ListItem>
+              </button>
+            </li>
           ))}
-        </List>
-      </ContentWrapper>
-    </Container>
+        </ul>
+      </div>
+    </div>
   );
 }
