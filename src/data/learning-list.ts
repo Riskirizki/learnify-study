@@ -20,3 +20,14 @@ export const learningList = [
     isDone: false,
   },
 ];
+
+let nextId = Math.max(...learningList.map((item) => item.id)) + 1;
+
+export function addLearningListItem(newItem: {
+  title: string;
+  isDone: boolean;
+}) {
+  const newItemWithId = { ...newItem, id: nextId++ };
+  learningList.push(newItemWithId);
+  return newItemWithId;
+}
