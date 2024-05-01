@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Detail from "./pages/Detail";
@@ -6,7 +5,7 @@ import Home from "./pages/Home";
 import LearningList from "./components/learning-list";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.render(
   <BrowserRouter>
     <div className="flex flex-col items-center">
       <nav className="bg-gray-200 py-4 w-full">
@@ -25,10 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             </Link>
           </li>
           <li>
-            <Link
-              to="/detail" // Tautan untuk Detail
-              className="text-gray-800 hover:text-blue-500"
-            >
+            <Link to="/detail" className="text-gray-800 hover:text-blue-500">
               Detail
             </Link>
           </li>

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Home() {
   return (
     <div className="w-full max-w-3xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
