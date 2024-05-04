@@ -1,4 +1,4 @@
-import LearningList from "./components/learning-list";
+import { LearningList } from "./components/learning-list";
 
 export function App() {
   return (

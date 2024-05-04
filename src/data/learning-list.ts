@@ -31,3 +31,28 @@ export function addLearningListItem(newItem: {
   learningList.push(newItemWithId);
   return newItemWithId;
 }
+
+export function deleteLearningListItemById(idToDelete: number) {
+  const indexToDelete = learningList.findIndex(
+    (item) => item.id === idToDelete
+  );
+  if (indexToDelete !== -1) {
+    learningList.splice(indexToDelete, 1);
+  }
+}
+
+export function editLearningListItemById(
+  idToEdit: number,
+  updatedItem: {
+    title: string;
+    isDone: boolean;
+  }
+) {
+  const indexToEdit = learningList.findIndex((item) => item.id === idToEdit);
+  if (indexToEdit !== -1) {
+    learningList[indexToEdit] = {
+      ...learningList[indexToEdit],
+      ...updatedItem,
+    };
+  }
+}
