@@ -1,4 +1,3 @@
-// LearningList.tsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { learningList } from "../data/learning-list";
